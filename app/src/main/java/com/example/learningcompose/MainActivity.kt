@@ -24,21 +24,23 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.learningcompose.composables.ImageCard2
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.farmer_events)
-            val description = "Farmer events occur at specific periods all year round."
-            val title = "Farmer Events"
+            val painter = painterResource(id = R.drawable.girl_2)
+            val description = "Arguably, this is the most beautiful black kid in the world. This was according to some survey done online."
+            val title = "Beautiful people"
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                ImageCard(painter = painter, contentDescription = description, title = title )
+                ImageCard2(painter = painter, contentDescription = description, title = title )
             }
         }
     }
@@ -57,7 +59,7 @@ fun ImageCard(
         elevation = 8.dp
     ) {
         Box(
-            modifier = Modifier.height(200.dp),
+            modifier = Modifier.height(200.dp)
         ) {
             Image(
                 painter = painter,
@@ -75,9 +77,7 @@ fun ImageCard(
                             startY = 300f
                         )
                     )
-            ) {
-
-            }
+            )
             Box(modifier = Modifier
                 .fillMaxSize()
                 .padding(12.dp),
