@@ -18,57 +18,46 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun ImageCard2(
+fun RandomImageCard(
     painter: Painter,
+    modifier: Modifier = Modifier,
     title: String,
-    contentDescription: String,
-    modifier: Modifier = Modifier
+    description: String
 ){
     Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        shape = RoundedCornerShape(12.dp),
         elevation = 8.dp
     ) {
         Box(
-            modifier = modifier.height(200.dp)
+            modifier = Modifier.height(200.dp)
         ) {
             Image(
-                painter = painter,
-                contentDescription = contentDescription,
-                contentScale = ContentScale.Crop,
-                modifier = modifier.fillMaxSize()
+                painter = painter ,
+                contentDescription = description,
+                contentScale = ContentScale.Crop
             )
-            Box(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ){
-                Text(
-                    title,
-                    modifier = modifier.align(
-                        Alignment.CenterStart
-                    ),
-                    style = TextStyle(
-                        color = Color.White
-                    ),
-                    fontSize = 18.sp
-                )
-            }
-            Spacer(modifier = modifier.height(36.dp))
-            Box(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                Text(
-                    contentDescription,
-                    modifier = modifier.align(
-                       Alignment.BottomStart
-                    ),
-                    style = TextStyle(color = Color.White),
-                    fontSize = 14.sp
-                )
-            }
         }
     }
 }
+
+@Composable
+fun DisplaySomeText(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Text(
+            text = "Some random text for test purposes",
+            style = TextStyle(
+                color = Color.White,
+                fontSize = 16.sp
+            )
+        )
+    }
+}
+

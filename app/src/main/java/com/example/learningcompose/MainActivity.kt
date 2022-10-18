@@ -24,7 +24,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.learningcompose.composables.ImageCard2
+import com.example.learningcompose.composables.DisplaySomeText
+import com.example.learningcompose.composables.RandomImageCard
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,15 +33,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.girl_2)
+            val painter = painterResource(id = R.drawable.farmer_events)
             val description = "Arguably, this is the most beautiful black kid in the world. This was according to some survey done online."
             val title = "Beautiful people"
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+                    .fillMaxSize()
+                    .background(color = Color.Black)
             ) {
-                ImageCard2(painter = painter, contentDescription = description, title = title )
+                RandomImageCard(painter, description = description, title = title)
+                DisplaySomeText()
             }
         }
     }
