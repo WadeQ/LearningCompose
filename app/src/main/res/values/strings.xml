@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LearningCompose</string>
+    <string name="show_less">The quick brown fox...</string>
+    <string name="show_more">The quick brown fox jumpped over the lazy dog!</string>
 </resources>

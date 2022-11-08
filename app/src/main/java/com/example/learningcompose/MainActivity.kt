@@ -1,5 +1,6 @@
 package com.example.learningcompose
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,11 +17,15 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.learningcompose.composables.DisplaySomeButton
 import com.example.learningcompose.composables.OnBoardingScreen
+import com.example.learningcompose.composables.ShowList
+import com.example.learningcompose.composables.ShowTextFields
 
 
 class MainActivity : ComponentActivity() {
@@ -39,9 +44,9 @@ class MainActivity : ComponentActivity() {
                     .background(color = Color.Black)
             ) {
                // RandomImageCard(painter, description = description)
-                OnBoardingScreen {
-
-                }
+                OnBoardingScreen()
+//                ShowTextFields()
+//                ShowList()
             }
         }
     }
