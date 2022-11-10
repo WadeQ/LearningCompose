@@ -22,10 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.learningcompose.composables.DisplaySomeButton
-import com.example.learningcompose.composables.OnBoardingScreen
-import com.example.learningcompose.composables.ShowList
-import com.example.learningcompose.composables.ShowTextFields
+import com.example.learningcompose.composables.*
 
 
 class MainActivity : ComponentActivity() {
@@ -44,72 +41,13 @@ class MainActivity : ComponentActivity() {
                     .background(color = Color.Black)
             ) {
                // RandomImageCard(painter, description = description)
-                OnBoardingScreen()
+//                OnBoardingScreen()
 //                ShowTextFields()
 //                ShowList()
+                HomeScreen()
             }
         }
     }
 }
 
 
-@Composable
-fun ImageCard(
-    painter: Painter,
-    contentDescription: String,
-    title: String,
-    modifier: Modifier = Modifier
-){
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        elevation = 8.dp
-    ) {
-        Box(
-            modifier = Modifier.height(200.dp)
-        ) {
-            Image(
-                painter = painter,
-                contentDescription =contentDescription,
-                contentScale = ContentScale.Crop )
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black
-                            ),
-                            startY = 300f
-                        )
-                    )
-            )
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp),
-                contentAlignment = Alignment.BottomStart
-            ) {
-                Text(
-                    title,
-                    style = TextStyle(color = Color.White),
-                    fontSize = 16.sp
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun Learning(name: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Blue),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Hello $name!")
-        Text("Some Random text")
-    }
-}

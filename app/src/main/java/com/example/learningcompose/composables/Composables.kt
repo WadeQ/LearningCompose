@@ -145,9 +145,7 @@ fun SomeButtonAndText(
                     )
             ) {
                Column(
-                   modifier = Modifier
-                       .weight(1f)
-                       .padding(16.dp)
+                   modifier = Modifier.padding(6.dp)
                ) {
                    Box(modifier.padding(16.dp)) {
                        Text(

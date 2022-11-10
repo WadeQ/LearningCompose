@@ -20,7 +20,7 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.farmer_events)
+            val painter = painterResource(id = R.drawable.girl_2)
             val description = "Arguably, this is the most beautiful black kid in the world. " +
                     "This was according to some survey done online."
             val title = "Beautiful people"
