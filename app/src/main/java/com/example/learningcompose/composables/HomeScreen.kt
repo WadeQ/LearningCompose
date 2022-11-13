@@ -1,5 +1,6 @@
 package com.example.learningcompose.composables
 
+import android.icu.text.AlphabeticIndex
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.learningcompose.R
+import com.example.learningcompose.domain.BottomNavMenu
 import com.example.learningcompose.domain.Feature
 import com.example.learningcompose.ui.theme.*
 
@@ -56,17 +58,25 @@ fun HomeScreen(){
                     ),
                     Feature(
                         "Night Island",
-                        R.drawable.play,
+                        R.drawable.headphone,
                         OrangeYellow1
                     ),
                     Feature(
                         "Calming sounds",
-                        R.drawable.play,
+                        R.drawable.video,
                         Beige3
                     )
                 )
             )
         }
+
+        BottomNavigationSection(list = listOf(
+            BottomNavMenu("Home", R.drawable.home),
+            BottomNavMenu("Meditate", R.drawable.meditation),
+            BottomNavMenu("Sleep", R.drawable.moon),
+            BottomNavMenu("Music", R.drawable.music),
+            BottomNavMenu("Profile", R.drawable.user),
+        ), modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
@@ -104,7 +114,7 @@ fun GreetingsLayout(
                )
            )
        }
-        Icon(painter = painterResource(id = com.example.learningcompose.R.drawable.search),
+        Icon(painter = painterResource(id = R.drawable.search),
             contentDescription = "Search",
             tint = Color.White,
             modifier = Modifier.size(34.dp)
@@ -278,7 +288,6 @@ fun FeatureItem(feature: Feature) {
                         contentDescription = "",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .padding(start = 6.dp)
                             .size(40.dp)
                             .align(Alignment.BottomStart)
                     )
@@ -296,6 +305,80 @@ fun FeatureItem(feature: Feature) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun BottomNavigationSection(
+    list: List<BottomNavMenu>,
+    modifier: Modifier = Modifier,
+    activeHighlightColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inActiveTextColor: Color  = AquaBlue,
+    initialSelectedItemIndex: Int = 0
+){
+
+    var selectedIndex by remember {
+        mutableStateOf(initialSelectedItemIndex)
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(DeepBlue)
+            .padding(16.dp)
+    ) {
+        list.forEachIndexed { index, items ->
+            BottomMenuSingleItem(
+                item = items,
+                isSelected = index == selectedIndex,
+                activeHighlightColor = activeHighlightColor,
+                activeTextColor = activeTextColor,
+                inActiveTextColor = inActiveTextColor
+            ){
+                selectedIndex = index
+            }
+        }
+    }
+
+}
+
+@Composable
+fun BottomMenuSingleItem(
+    item: BottomNavMenu,
+    activeHighlightColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inActiveTextColor: Color  = AquaBlue,
+    isSelected:  Boolean,
+    onMenuItemClicked: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.clickable {
+            onMenuItemClicked()
+        }
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .background(if (isSelected) activeHighlightColor else Color.Transparent)
+                .padding(10.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = item.iconId),
+                contentDescription = item.title,
+                tint = if (isSelected) activeTextColor else inActiveTextColor,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        Text(
+            text = item.title,
+            color = if(isSelected) activeTextColor else inActiveTextColor
+        )
     }
 }
 

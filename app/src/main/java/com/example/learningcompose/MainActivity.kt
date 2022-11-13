@@ -44,7 +44,8 @@ class MainActivity : ComponentActivity() {
 //                OnBoardingScreen()
 //                ShowTextFields()
 //                ShowList()
-                HomeScreen()
+//                HomeScreen()
+                DetailsScreen()
             }
         }
     }
