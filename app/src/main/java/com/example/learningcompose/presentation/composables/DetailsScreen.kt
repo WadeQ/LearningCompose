@@ -1,8 +1,6 @@
-package com.example.learningcompose.composables
+package com.example.learningcompose.presentation.composables
 
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -22,57 +20,107 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.learningcompose.R
-import com.example.learningcompose.domain.Feature
+import com.example.learningcompose.domain.model.Feature
+import com.example.learningcompose.presentation.composables.destinations.HomeScreenDestination
 import com.example.learningcompose.ui.theme.*
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 
+@Destination(route = "Details")
 @Composable
-fun DetailsScreen(){
-    var scrollState = rememberScrollState()
+fun DetailsScreen(
+    navigator: DestinationsNavigator,
+    feature: Feature
+){
+
+    val list = listOf(
+        Feature(
+            "Sleep meditation",
+            R.drawable.headphone,
+            BlueViolet2,
+            "Best practice  meditations",
+            "Sleep Music",
+            "45 min",
+            "Ease the mind into a restful night's sleep with these deep," +
+                    "ambient tones",
+            "12,542",
+            "43,453"
+        ),
+        Feature(
+            "Tips for sleeping",
+            R.drawable.video,
+            LightGreen2,
+            "Best practice for sleeping",
+            "Sleep Music",
+            "45 min",
+            "Ease the mind into a restful night's sleep with these deep," +
+                    "ambient tones",
+            "12,500",
+            "63,0000"
+        ),
+        Feature(
+            "Night Island",
+            R.drawable.headphone,
+            OrangeYellow1,
+            "Best practice night islands",
+            "Sleep Music",
+            "45 min",
+            "Ease the mind into a restful night's sleep with these deep," +
+                    "ambient tones",
+            "12,542",
+            "43,453"
+        ),
+        Feature(
+            "Calming sounds",
+            R.drawable.video,
+            Beige3,
+            "Best practice calming sounds",
+            "Sleep Music",
+            "45 min",
+            "Ease the mind into a restful night's sleep with these deep," +
+                    "ambient tones",
+            "12,542",
+            "43,453"
+        )
+    )
     Box(
         modifier = Modifier
             .background(DeepBlue)
             .fillMaxSize()
     ) {
         Column {
-            TopNavigationMenu()
+            TopNavigationMenu(
+                onBackArrowClicked = {
+                    navigator.navigate(HomeScreenDestination)
+                }
+            )
             FeaturedBanner(
-                title = "Sleep Meditation",
-                description = "Best practice meditations"
+                feature.title,
+                feature.titleBanner
             )
             FeatureCard(
-                feature = Feature(
-                    "",
-                    R.drawable.headphone,
-                    BlueViolet2
-                )
+                feature.backGroundColor!!,
+                feature.iconId
             )
             CardDetails(
-                title = "Sleep Music - 45 min",
-                description = "Ease the mind  into a restful night's sleep with these deep, " +
-                        "ambient tones."
+                feature.musicType,
+                feature.musicDuration,
+                feature.musicDescription,
+                feature.savedListens,
+                feature.liveListens
             )
-
             RelatedSection(
-                listOf(
-                    Feature(
-                        "Night Island",
-                        R.drawable.headphone,
-                        OrangeYellow1
-                    ),
-                    Feature(
-                        "Calming sounds",
-                        R.drawable.video,
-                        Beige3
-                    )
-                )
+               list
             )
         }
     }
 }
 
 @Composable
-fun TopNavigationMenu(){
+fun TopNavigationMenu(
+    onBackArrowClicked: () -> Unit
+){
     Row(
         modifier = Modifier
             .padding(16.dp)
@@ -81,9 +129,13 @@ fun TopNavigationMenu(){
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Icon(painter = painterResource(id = R.drawable.arrow),
-            contentDescription = "Search",
+            contentDescription = "Back",
             tint = Color.White,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier
+                .clickable {
+                    onBackArrowClicked.invoke()
+                }
+                .size(24.dp)
         )
         Icon(painter = painterResource(id = R.drawable.favorite),
             contentDescription = "Search",
@@ -96,8 +148,8 @@ fun TopNavigationMenu(){
 
 @Composable
 fun FeaturedBanner(
-    title: String,
-    description: String
+   title: String,
+   titleBanner: String
 ){
     Column(
         Modifier
@@ -105,7 +157,7 @@ fun FeaturedBanner(
             .padding(16.dp)
     ) {
         Text(
-            text = "$title",
+            text = title,
             style = TextStyle(
                 color = TextWhite,
                 fontFamily = gothicA1,
@@ -118,7 +170,7 @@ fun FeaturedBanner(
             .padding(6.dp))
 
         Text(
-            text = "$description",
+            text = titleBanner,
             style = TextStyle(
                 color = AquaBlue,
                 fontFamily = gothicA1,
@@ -131,24 +183,24 @@ fun FeaturedBanner(
 
 @Composable
 fun FeatureCard(
-    modifier: Modifier = Modifier,
-    feature: Feature
+    backGroundColor: Color,
+    iconId: Int
 ){
     Card(
-        modifier
+        Modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(200.dp)
             .padding(16.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 16.dp
     ) {
        Box(
            modifier = Modifier
-               .background(feature.backGroundColor)
+               .background(backGroundColor)
                .padding(10.dp)
        ) {
            Image(
-               painter = painterResource(id = feature.iconId) ,
+               painter = painterResource(id = iconId) ,
                contentDescription = "",
                contentScale = ContentScale.Crop,
                modifier = Modifier
@@ -174,8 +226,11 @@ fun FeatureCard(
 
 @Composable
 fun CardDetails(
-    title: String,
-    description: String
+    musicType: String,
+    musicDuration: String,
+    musicDescription: String,
+    savedListens: String,
+    liveListens: String
 ){
     Column(
         Modifier
@@ -183,7 +238,7 @@ fun CardDetails(
             .padding(16.dp)
     ) {
         Text(
-            text = "$title",
+            text = "$musicType-$musicDuration",
             style = TextStyle(
                 color = AquaBlue,
                 fontFamily = gothicA1,
@@ -196,7 +251,7 @@ fun CardDetails(
             .padding(6.dp))
 
         Text(
-            text = "$description",
+            text = musicDescription,
             style = TextStyle(
                 color = AquaBlue,
                 fontFamily = gothicA1,
@@ -220,7 +275,7 @@ fun CardDetails(
             )
 
             Text(
-                text = "12,542 Saved",
+                text = "$savedListens Saved",
                 style = TextStyle(
                     color = TextWhite,
                     fontFamily = gothicA1,
@@ -243,7 +298,7 @@ fun CardDetails(
                 )
 
                 Text(
-                    text = "43,453 Listening",
+                    text = "$liveListens Listening",
                     style = TextStyle(
                         color = TextWhite,
                         fontFamily = gothicA1,
@@ -298,7 +353,10 @@ fun RelatedSection(
             modifier = Modifier.fillMaxHeight(),
         ){
             items(features.size) {
-                FeatureItem(feature = features[it])
+                FeatureItem(
+                    feature = features[it],
+                    onItemClicked = {}
+                )
             }
         }
     }

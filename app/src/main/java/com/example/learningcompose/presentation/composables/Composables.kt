@@ -1,16 +1,12 @@
-package com.example.learningcompose.composables
+package com.example.learningcompose.presentation.composables
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,10 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.learningcompose.HomeActivity
+import com.example.learningcompose.presentation.HomeActivity
 import com.example.learningcompose.R
 import kotlinx.coroutines.launch
 
@@ -187,7 +182,6 @@ fun SomeButtonAndText(
         }
     }
 }
-
 
 @Composable
 fun ShowTextFields(

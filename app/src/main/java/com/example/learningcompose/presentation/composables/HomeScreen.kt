@@ -1,6 +1,5 @@
-package com.example.learningcompose.composables
+package com.example.learningcompose.presentation.composables
 
-import android.icu.text.AlphabeticIndex
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,13 +25,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.learningcompose.R
-import com.example.learningcompose.domain.BottomNavMenu
-import com.example.learningcompose.domain.Feature
+import com.example.learningcompose.domain.model.BottomNavMenu
+import com.example.learningcompose.domain.model.Feature
+import com.example.learningcompose.presentation.composables.destinations.DetailsScreenDestination
 import com.example.learningcompose.ui.theme.*
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 
+@Destination()
 @Composable
-fun HomeScreen(){
+fun HomeScreen(
+    navigator: DestinationsNavigator
+){
+
     Box(
         modifier = Modifier
             .background(DeepBlue)
@@ -49,25 +55,51 @@ fun HomeScreen(){
                     Feature(
                         "Sleep meditation",
                         R.drawable.headphone,
-                        BlueViolet2
+                        BlueViolet2,
+                        "Best practice  meditations",
+                        "Sleep Music",
+                    "45 min",
+                        "Ease the mind into a restful night's sleep with these deep, ambient tones",
+                        "12,542",
+                        "43,453"
                     ),
                     Feature(
                         "Tips for sleeping",
                         R.drawable.video,
-                        LightGreen2
+                        LightGreen2,
+                        "Best practice for sleeping",
+                        "Sleep Music",
+                        "45 min",
+                        "Ease the mind into a restful night's sleep with these deep, ambient tones",
+                        "12,500",
+                        "63,0000"
                     ),
                     Feature(
                         "Night Island",
                         R.drawable.headphone,
-                        OrangeYellow1
+                        OrangeYellow2,
+                        "Best practice night islands",
+                        "Sleep Music",
+                        "45 min",
+                        "Ease the mind into a restful night's sleep with these deep, ambient tones",
+                        "12,542",
+                        "43,453"
                     ),
                     Feature(
                         "Calming sounds",
                         R.drawable.video,
-                        Beige3
+                        Beige3,
+                        "Best practice calming sounds",
+                        "Sleep Music",
+                        "45 min",
+                        "Ease the mind into a restful night's sleep with these deep, ambient tones",
+                        "12,542",
+                        "43,453"
                     )
                 )
-            )
+            ) {
+                navigator.navigate(DetailsScreenDestination(it))
+            }
         }
 
         BottomNavigationSection(list = listOf(
@@ -154,9 +186,9 @@ fun ChipsSection(
 }
 
 @Composable
-fun MeditationCard(modifier: Modifier = Modifier){
+fun MeditationCard(){
     Card(
-        modifier = modifier
+        modifier = Modifier
             .height(130.dp)
             .padding(16.dp)
             .fillMaxWidth(),
@@ -164,12 +196,12 @@ fun MeditationCard(modifier: Modifier = Modifier){
         elevation = 16.dp
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .background(LightRed)
         ) {
             Row(
-                modifier
+                Modifier
                     .fillMaxWidth()
                     .padding(end = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -214,8 +246,10 @@ fun MeditationCard(modifier: Modifier = Modifier){
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FeaturedSection(
-    features: List<Feature>
+    features: List<Feature>,
+    onClicked: (Feature) -> Unit
 ){
+
     Column(
         Modifier
             .fillMaxWidth()
@@ -244,15 +278,24 @@ fun FeaturedSection(
             contentPadding = PaddingValues(start = 7.5.dp, end = 7.5.dp, bottom = 100.dp),
             modifier = Modifier.fillMaxHeight(),
         ){
-            items(features.size) {
-                FeatureItem(feature = features[it])
+            items(features.size) { it ->
+                FeatureItem(
+                    feature = features[it],
+                    onItemClicked = { feature ->
+                        onClicked.invoke(feature)
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun FeatureItem(feature: Feature) {
+fun FeatureItem(
+    feature: Feature,
+    onItemClicked:  (Feature) -> Unit
+) {
+
     Card(
         modifier = Modifier
             .height(170.dp)
@@ -293,7 +336,9 @@ fun FeatureItem(feature: Feature) {
                     )
 
                    Button(
-                       onClick = { /*TODO*/ },
+                       onClick = {
+                           onItemClicked.invoke(feature)
+                       },
                             Modifier.align(Alignment.BottomEnd),
                         shape = RoundedCornerShape(16.dp)
                    ) {
@@ -342,7 +387,6 @@ fun BottomNavigationSection(
             }
         }
     }
-
 }
 
 @Composable
