@@ -35,6 +35,7 @@ fun LoginScreen(
     val authViewModel  = viewModel<AuthViewModel>()
     val state = authViewModel.state
     val context = LocalContext.current
+
     LaunchedEffect(key1 = context){
        authViewModel.loginEvents.collect{ event ->
            when(event){
@@ -91,7 +92,9 @@ fun LoginScreen(
                 Text(
                     text = state.emailError,
                     color = MaterialTheme.colors.error,
-                    modifier = Modifier.align(Alignment.End)
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .align(Alignment.End)
                 )
             }
 
@@ -126,9 +129,11 @@ fun LoginScreen(
 
             if (state.passwordError != null){
                 Text(
-                    text = state.password,
+                    text = state.passwordError,
                     color = MaterialTheme.colors.error,
-                    modifier = Modifier.align(Alignment.End)
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .align(Alignment.End)
                 )
             }
 
@@ -160,13 +165,18 @@ fun LoginScreen(
                     focusedLabelColor = LightGreen1
                 )
             )
+
             if (state.confirmPasswordError != null){
                 Text(
                     text = state.confirmPasswordError,
                     color = MaterialTheme.colors.error,
-                    modifier = Modifier.align(Alignment.End)
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .align(Alignment.End)
                 )
             }
+
+            Spacer(modifier = Modifier.padding(top = 16.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth()
@@ -184,19 +194,21 @@ fun LoginScreen(
                     )
                 )
 
-                Spacer(modifier = Modifier.width(8.dp))
-
                 Text(
                     text = "Accept Terms",
                     modifier = Modifier.padding(top = 16.dp),
                     color = LightGreen2
                 )
-                if (state.termsError != null){
-                    Text(
-                        text = state.termsError,
-                        color = MaterialTheme.colors.error,
-                    )
-                }
+            }
+
+            if (state.termsError != null){
+                Text(
+                    text = state.termsError,
+                    color = MaterialTheme.colors.error,
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .align(Alignment.Start)
+                )
             }
 
             Spacer(modifier = Modifier.padding(8.dp))

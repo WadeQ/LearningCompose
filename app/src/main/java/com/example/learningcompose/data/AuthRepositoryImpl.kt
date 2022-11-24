@@ -5,7 +5,7 @@ import com.example.learningcompose.domain.`interface`.ILoginValidator
 import com.example.learningcompose.domain.model.ValidationResultWrapper
 
 
-class AuthRepositoryImpl : ILoginValidator{
+class AuthRepositoryImpl() : ILoginValidator{
 
     override fun validateEmail(userEmail: String): ValidationResultWrapper {
        if(userEmail.isBlank()){
@@ -66,7 +66,7 @@ class AuthRepositoryImpl : ILoginValidator{
         if (!isAccepted){
             return ValidationResultWrapper(
                 successful = false,
-                errorMessage = "You must first accept terms and conditions!"
+                errorMessage = "You must first accept terms!"
             )
         }
         return ValidationResultWrapper(

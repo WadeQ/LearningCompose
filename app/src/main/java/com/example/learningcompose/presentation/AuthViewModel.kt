@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.learningcompose.data.AuthRepositoryImpl
 import com.example.learningcompose.domain.`interface`.ILoginValidator
 import com.example.learningcompose.presentation.utils.OnLoginEvent
 import com.example.learningcompose.presentation.utils.ResultWrapper
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 
 
 class AuthViewModel(
-    private val authRepository: ILoginValidator
+    private val authRepository: AuthRepositoryImpl = AuthRepositoryImpl()
 ): ViewModel() {
 
     var state by mutableStateOf(LoginState())
