@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.learningcompose.data.AuthRepositoryImpl
-import com.example.learningcompose.domain.`interface`.ILoginValidator
+import com.example.learningcompose.presentation.utils.LoginState
 import com.example.learningcompose.presentation.utils.OnLoginEvent
 import com.example.learningcompose.presentation.utils.ResultWrapper
 import kotlinx.coroutines.channels.Channel
@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 class AuthViewModel(
     private val authRepository: AuthRepositoryImpl = AuthRepositoryImpl()
 ): ViewModel() {
-
     var state by mutableStateOf(LoginState())
     private val loginEventChannel = Channel<OnLoginEvent>()
     val loginEvents = loginEventChannel.receiveAsFlow()
@@ -25,28 +24,39 @@ class AuthViewModel(
     fun onLoginEvent(event: OnLoginEvent){
        when(event){
            is OnLoginEvent.OnEmailChanged -> {
-               state = state.copy(email = event.email)
+               state = state.copy(
+                   email = event.email
+               )
            }
            is OnLoginEvent.OnPasswordChanged -> {
-               state = state.copy(password = event.password)
+               state = state.copy(
+                   password = event.password
+               )
            }
            is OnLoginEvent.OnConfirmPasswordChanged -> {
-               state = state.copy(confirmPassword = event.confirmPassword)
+               state = state.copy(
+                   confirmPassword = event.confirmPassword
+               )
            }
            is OnLoginEvent.OnTermsAccepted -> {
-               state = state.copy(acceptedTerms = event.isAccepted)
+               state = state.copy(
+                   acceptedTerms = event.isAccepted
+               )
            }
            is OnLoginEvent.OnLoginButtonClicked -> {
                submitLoginForm()
            }
+           else -> Unit
        }
     }
 
     private fun submitLoginForm() {
         val email = authRepository.validateEmail(state.email)
         val password = authRepository.validatePassword(state.password)
-        val confirmPassword = authRepository
-            .validateConfirmPassword(state.password, state.confirmPassword)
+        val confirmPassword = authRepository.validateConfirmPassword(
+            state.password,
+            state.confirmPassword
+        )
         val terms = authRepository.validateTerms(state.acceptedTerms)
         listOf(
             email,

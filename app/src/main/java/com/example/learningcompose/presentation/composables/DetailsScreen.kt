@@ -123,7 +123,7 @@ fun TopNavigationMenu(
 ){
     Row(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -190,7 +190,7 @@ fun FeatureCard(
         Modifier
             .fillMaxWidth()
             .height(200.dp)
-            .padding(16.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 8.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 16.dp
     ) {

@@ -27,7 +27,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 
-@Destination(start = true)
+@Destination()
 @Composable
 fun LoginScreen(
     navigator: DestinationsNavigator
@@ -116,7 +116,7 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Password
                 ),
                 visualTransformation = PasswordVisualTransformation(),
-                singleLine = true,
+                singleLine = true,   
                 modifier = Modifier
                     .padding(start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),

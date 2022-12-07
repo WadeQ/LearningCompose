@@ -1,6 +1,6 @@
 package com.example.learningcompose.domain.`interface`
 
-import com.example.learningcompose.domain.model.ValidationResultWrapper
+import com.example.learningcompose.presentation.utils.ValidationResultWrapper
 
 
 interface ILoginValidator {

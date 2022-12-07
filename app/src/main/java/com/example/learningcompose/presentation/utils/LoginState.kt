@@ -1,4 +1,4 @@
-package com.example.learningcompose.presentation
+package com.example.learningcompose.presentation.utils
 
 data class LoginState(
     val email: String = "",

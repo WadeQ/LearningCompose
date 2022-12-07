@@ -2,7 +2,7 @@ package com.example.learningcompose.data
 
 import android.util.Patterns
 import com.example.learningcompose.domain.`interface`.ILoginValidator
-import com.example.learningcompose.domain.model.ValidationResultWrapper
+import com.example.learningcompose.presentation.utils.ValidationResultWrapper
 
 
 class AuthRepositoryImpl() : ILoginValidator{
