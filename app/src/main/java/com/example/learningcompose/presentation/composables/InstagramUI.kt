@@ -5,9 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,10 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.learningcompose.R
-import com.example.learningcompose.ui.theme.ButtonBlue
-import com.example.learningcompose.ui.theme.DarkerButtonBlue
-import com.example.learningcompose.ui.theme.TextWhite
-import com.example.learningcompose.ui.theme.gothicA1
+import com.example.learningcompose.ui.theme.*
 import com.ramcosta.composedestinations.annotation.Destination
 
 
@@ -47,11 +44,92 @@ fun InstagramMainScreen(
                "Phillip Lackner",
                "18"
            )
-           BioChipGroup(chips = listOf(
-               "Following","Message","Email","^"
-           ))
+           BioChipGroup()
+           StorySection()
+           StoryDefinitionSection()
+           InstagramIconsSection()
        }
    }
+}
+
+@Composable
+fun InstagramIconsSection() {
+    Row(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, top = 36.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        Icon(painter = painterResource(id = R.drawable.pixels),
+            contentDescription = "Grid",
+            tint = Color.Black,
+            modifier = Modifier
+                .clickable {
+
+                }
+                .size(24.dp)
+        )
+
+        Icon(painter = painterResource(id = R.drawable.user_profile),
+            contentDescription = "Grid",
+            tint = Color.Black,
+            modifier = Modifier
+                .clickable {
+
+                }
+                .size(24.dp)
+        )
+    }
+}
+
+@Composable
+fun StoryDefinitionSection() {
+    Row(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    )
+    {
+        Text(
+            text = "YouTube",
+            style = TextStyle(
+                color = Color.Black,
+                fontFamily = gothicA1,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Text(
+            text = "Q and A",
+            style = TextStyle(
+                color = Color.Black,
+                fontFamily = gothicA1,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Text(
+            text = "Discord",
+            style = TextStyle(
+                color = Color.Black,
+                fontFamily = gothicA1,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Text(
+            text = "Telegram",
+            style = TextStyle(
+                color = Color.Black,
+                fontFamily = gothicA1,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+    }
 }
 
 @Composable
@@ -244,28 +322,115 @@ fun UserBio(
 }
 
 @Composable
-fun BioChipGroup(
-    chips: List<String>
-){
-    LazyRow{
-        items(chips.size){
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .padding(start = 15.dp, top = 15.dp, bottom = 15.dp)
-                    .clickable {
+fun BioChipGroup(){
+    Row(
+        modifier = Modifier
+            .padding(start = 8.dp, end = 8.dp, top = 16.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Button(
+            onClick = {
+//                authViewModel.onLoginEvent(OnLoginEvent.OnLoginButtonClicked)
+            },
+            colors = ButtonDefaults.buttonColors(Color.White),
+            modifier = Modifier
+                .padding(4.dp)
+        ) {
+            Text(text = "Following")
 
-                    }
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(Color.White)
-                    .padding(15.dp)
-            ){
-                Text(
-                    text = chips[it],
-                    color = Color.Black
-                )
-            }
+            Icon(painter = painterResource(id = R.drawable.down),
+                contentDescription = "Down",
+                tint = Color.Black,
+                modifier = Modifier
+                    .size(20.dp)
+            )
         }
+        Button(
+            onClick = {
+
+            },
+            colors = ButtonDefaults.buttonColors(Color.White),
+            modifier = Modifier
+                .padding(4.dp)
+        ) {
+            Text(text = "Message")
+        }
+        Button(
+            onClick = {
+
+            },
+            colors = ButtonDefaults.buttonColors(Color.White),
+            modifier = Modifier
+                .padding(4.dp)
+        ) {
+            Text(text = "Email")
+        }
+        Button(
+            onClick = {
+
+            },
+            colors = ButtonDefaults.buttonColors(Color.White),
+            modifier = Modifier
+                .padding(4.dp)
+        ) {
+            Text(text = "")
+            Icon(painter = painterResource(id = R.drawable.down),
+                contentDescription = "Down",
+                tint = Color.Black,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun StorySection(){
+    Row(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Image(
+            painter = painterResource(R.drawable.youtube),
+            contentDescription = "avatar",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(70.dp)
+                .clip(CircleShape)
+                .border(2.dp, Color.Gray, CircleShape)
+        )
+        Image(
+            painter = painterResource(R.drawable.qa),
+            contentDescription = "avatar",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(70.dp)
+                .clip(CircleShape)
+                .border(2.dp, Color.Gray, CircleShape)
+        )
+        Image(
+            painter = painterResource(R.drawable.discord),
+            contentDescription = "avatar",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(70.dp)
+                .clip(CircleShape)
+                .border(2.dp, Color.Gray, CircleShape)
+        )
+        Image(
+            painter = painterResource(R.drawable.telegram),
+            contentDescription = "avatar",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(70.dp)
+                .clip(CircleShape)
+                .border(2.dp, Color.Gray, CircleShape)
+        )
     }
 }
 
