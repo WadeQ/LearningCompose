@@ -53,7 +53,7 @@ class AuthRepositoryImpl() : ILoginValidator{
         if(password != confirmPassword){
             return ValidationResultWrapper(
                 successful = false,
-                errorMessage = "Passwords ddo not match!"
+                errorMessage = "Passwords do not match!"
             )
         }
 
