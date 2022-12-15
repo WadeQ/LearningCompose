@@ -1,15 +1,12 @@
 package com.example.learningcompose.presentation.composables
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,8 +45,65 @@ fun InstagramMainScreen(
            StorySection()
            StoryDefinitionSection()
            InstagramIconsSection()
+           InstagramPicGridSection(
+               listOf(
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2,
+                   R.drawable.girl_2
+               )
+           )
        }
    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun InstagramPicGridSection(
+    images: List<Int>
+) {
+
+    Spacer(modifier = Modifier.padding(8.dp))
+
+    LazyVerticalGrid(
+        verticalArrangement = Arrangement.spacedBy(1.dp),
+        horizontalArrangement = Arrangement.spacedBy(1.dp),
+        cells = GridCells.Fixed(3),
+        contentPadding = PaddingValues(bottom = 1.dp),
+        modifier = Modifier
+            .background(Color.Black)
+            .wrapContentHeight(),
+    ){
+        items(images.size) {
+            ImageGridItem(
+                images = images[it]
+            )
+        }
+    }
+}
+
+@Composable
+fun ImageGridItem(images: Int) {
+    Card(
+        modifier = Modifier
+            .height(100.dp)
+            .fillMaxWidth(0.25f),
+        shape = RoundedCornerShape(0.dp),
+        elevation = 8.dp
+    ) {
+        Image(
+            painter = painterResource(id = images) ,
+            contentDescription = "",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(100.dp)
+        )
+    }
 }
 
 @Composable
@@ -133,9 +187,7 @@ fun StoryDefinitionSection() {
 }
 
 @Composable
-fun NavigationBarTop(
-
-) {
+fun NavigationBarTop() {
     Row(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
