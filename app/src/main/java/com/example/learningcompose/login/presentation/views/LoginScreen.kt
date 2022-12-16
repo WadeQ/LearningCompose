@@ -1,4 +1,4 @@
-package com.example.learningcompose.presentation.composables
+package com.example.learningcompose.login.presentation.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,10 +15,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.learningcompose.R
-import com.example.learningcompose.presentation.AuthViewModel
-import com.example.learningcompose.presentation.composables.destinations.HomeScreenDestination
-import com.example.learningcompose.presentation.utils.OnLoginEvent
-import com.example.learningcompose.presentation.utils.ResultWrapper
+import com.example.learningcompose.destinations.HomeScreenDestination
+import com.example.learningcompose.login.presentation.viewmodel.AuthViewModel
+import com.example.learningcompose.login.utils.OnLoginEvent
+import com.example.learningcompose.login.utils.ResultWrapper
 import com.example.learningcompose.ui.theme.DeepBlue
 import com.example.learningcompose.ui.theme.LightGreen1
 import com.example.learningcompose.ui.theme.LightGreen2
@@ -30,8 +30,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination()
 @Composable
 fun LoginScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ){
+
     val authViewModel  = viewModel<AuthViewModel>()
     val state = authViewModel.state
     val context = LocalContext.current

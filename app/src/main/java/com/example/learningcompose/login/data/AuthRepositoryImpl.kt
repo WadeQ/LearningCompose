@@ -1,11 +1,11 @@
-package com.example.learningcompose.data
+package com.example.learningcompose.login.data
 
 import android.util.Patterns
-import com.example.learningcompose.domain.`interface`.ILoginValidator
-import com.example.learningcompose.presentation.utils.ValidationResultWrapper
+import com.example.learningcompose.login.domain.`interface`.ILoginValidator
+import com.example.learningcompose.login.utils.ValidationResultWrapper
 
 
-class AuthRepositoryImpl() : ILoginValidator{
+class AuthRepositoryImpl(): ILoginValidator {
 
     override fun validateEmail(userEmail: String): ValidationResultWrapper {
        if(userEmail.isBlank()){

@@ -1,4 +1,4 @@
-package com.example.learningcompose.presentation.composables
+package com.example.learningcompose.meditation.presentation
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.learningcompose.R
-import com.example.learningcompose.domain.model.Feature
-import com.example.learningcompose.presentation.composables.destinations.HomeScreenDestination
+import com.example.learningcompose.destinations.HomeScreenDestination
+import com.example.learningcompose.login.domain.model.Feature
 import com.example.learningcompose.ui.theme.*
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

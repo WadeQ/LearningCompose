@@ -1,4 +1,4 @@
-package com.example.learningcompose.domain.model
+package com.example.learningcompose.login.domain.model
 
 import android.os.Parcel
 import android.os.Parcelable

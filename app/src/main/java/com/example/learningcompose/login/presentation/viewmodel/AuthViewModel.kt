@@ -1,22 +1,23 @@
-package com.example.learningcompose.presentation
+package com.example.learningcompose.login.presentation.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.learningcompose.data.AuthRepositoryImpl
-import com.example.learningcompose.presentation.utils.LoginState
-import com.example.learningcompose.presentation.utils.OnLoginEvent
-import com.example.learningcompose.presentation.utils.ResultWrapper
+import com.example.learningcompose.login.data.AuthRepositoryImpl
+import com.example.learningcompose.login.utils.LoginState
+import com.example.learningcompose.login.utils.OnLoginEvent
+import com.example.learningcompose.login.utils.ResultWrapper
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 
-class AuthViewModel(
+class AuthViewModel (
     private val authRepository: AuthRepositoryImpl = AuthRepositoryImpl()
 ): ViewModel() {
+
     var state by mutableStateOf(LoginState())
     private val loginEventChannel = Channel<OnLoginEvent>()
     val loginEvents = loginEventChannel.receiveAsFlow()

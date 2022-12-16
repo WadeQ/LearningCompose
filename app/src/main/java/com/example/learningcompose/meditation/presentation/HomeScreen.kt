@@ -1,4 +1,4 @@
-package com.example.learningcompose.presentation.composables
+package com.example.learningcompose.meditation.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -26,9 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.learningcompose.R
-import com.example.learningcompose.domain.model.BottomNavMenu
-import com.example.learningcompose.domain.model.Feature
-import com.example.learningcompose.presentation.composables.destinations.DetailsScreenDestination
+import com.example.learningcompose.destinations.DetailsScreenDestination
+import com.example.learningcompose.login.domain.model.BottomNavMenu
+import com.example.learningcompose.login.domain.model.Feature
 import com.example.learningcompose.ui.theme.*
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
